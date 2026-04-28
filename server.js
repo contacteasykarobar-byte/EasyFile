@@ -125,7 +125,7 @@ app.post("/send-message", async (req, res) => {
 // ================= SEND PDF =================
 app.post("/send-pdf", async (req, res) => {
   try {
-    const { userId, number, fileUrl } = req.body;
+    const { userId, number, fileUrl,filename,message} = req.body;
 
     if (!sessions[userId]?.connected) {
       return res.json({ error: "Not connected" });
@@ -136,7 +136,8 @@ app.post("/send-pdf", async (req, res) => {
       {
         document: { url: fileUrl },
         mimetype: "application/pdf",
-        fileName: "invoice.pdf"
+        fileName: filename,
+        caption:message
       }
     );
 
